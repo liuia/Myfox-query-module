@@ -7,7 +7,7 @@
 
    File: daemon.js
    Author: xuyi (xuyi.zl@taobao.com)
-   Description: ÊØ»¤½ø³Ì
+   Description: ï¿½Ø»ï¿½ï¿½ï¿½ï¿½
    Last Modified: 2012-02-27
    */
 
@@ -278,7 +278,7 @@ fireWall.prototype.testBad = function(arr, callback) {
 /* {{{ function _isBad()*/
 function _isBad(arr) {
   var weightMap = {
-    /*¸÷ÖÖÌØÕ÷È¨ÖØ*/
+    /*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½*/
     type: {
             'ALL': 60,
           },
@@ -333,9 +333,9 @@ function _isBad(arr) {
 /* }}}*/
 
 /* {{{ function _getBanMinute()*/
-//»ñµÃsql±»·â½ûµÄÊ±¼ä
-//sql ÔÚ¹æ¶¨µÄÊ±¼äÄÚ±»countµÄ´ÎÊý*±ÈÀý
-//×î´ó·â½ûÊ±³¤30min
+//ï¿½ï¿½ï¿½sqlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+//sql ï¿½Ú¹æ¶¨ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ú±ï¿½countï¿½Ä´ï¿½ï¿½ï¿½*ï¿½ï¿½ï¿½ï¿½
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½30min
 function _getBanMinute(count) {
   return Math.min(30, Math.round(count * 0.1));
 }
@@ -348,9 +348,9 @@ function _getConn(host, user, pass, port) {
     conn.initSync();
     conn.setOptionSync(conn.MYSQL_OPT_CONNECT_TIMEOUT, 1);
     conn.setOptionSync(conn.MYSQL_OPT_READ_TIMEOUT, 2); // *3 retry
-    conn.setOptionSync(conn.MYSQL_OPT_RECONNECT, 1); //×Ô¶¯ÖØÁ¬
+    conn.setOptionSync(conn.MYSQL_OPT_RECONNECT, 1); //ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½
     conn.realConnectSync(host, user, pass, '', port);
-    conn.setCharsetSync('utf8');
+    conn.setCharsetSync('gbk');
   } catch(e) {
     return null;
   }

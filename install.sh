@@ -8,7 +8,7 @@
 #-p{your_mysqlServer_pass}
 
 #修改下面句子
-declare -r MYSQL="mysql -h127.0.0.1 -u用户名 -p密码 --local-infile=1 --default-character-set=utf8"
+declare -r MYSQL="mysql -h127.0.0.1 -P5029 -uliurijia -pliurijia --local-infile=1 --default-character-set=gbk"
 #example:如果我的用户名为root,密码为mypassword,端口为3306,则将declare句子改为如下样子。
 #declare -r MYSQL="mysql5 -h127.0.0.1 -uroot -pmypassword -P3306 --local-infile=1 --default-character-set=utf8"
 

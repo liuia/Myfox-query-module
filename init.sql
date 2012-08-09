@@ -39,8 +39,8 @@ CREATE TABLE dev_host_list (
 	KEY idx_host_pos (host_pos)
 ) ENGINE = MyISAM DEFAULT CHARSET=UTF8;
 
-INSERT INTO dev_host_list VALUES (1,1,0,0,'host1',NOW(),NOW(),'127.0.0.1',3306,'##用户名##','##密码##','','');
-INSERT INTO dev_host_list VALUES (2,1,0,0,'host2',NOW(),NOW(),'127.0.0.1',3306,'##用户名##','##密码##','','');
+INSERT INTO dev_host_list VALUES (1,1,0,0,'host1',NOW(),NOW(),'127.0.0.1',5029,'liurijia','liurijia','','');
+INSERT INTO dev_host_list VALUES (2,1,0,0,'host2',NOW(),NOW(),'127.0.0.1',3306,'liurijia','liurijia','','');
 
 UPDATE dev_host_list SET host_pos = INET_ATON(conn_host);
 
@@ -63,7 +63,7 @@ CREATE TABLE dev_table_list (
 	sql_import text not null default '',
 	PRIMARY KEY pk_table_id (autokid),
 	UNIQUE KEY uk_table_name (table_name)
-) ENGINE = InnoDB DEFAULT CHARSET=UTF8;
+) ENGINE = MyISAM DEFAULT CHARSET=UTF8;
 
 INSERT INTO dev_table_list VALUES (1,NOW(),NOW(),2,5,1000,'0.20',1,0,'mirror','测试镜像表','','','');
 INSERT INTO dev_table_list VALUES (2,NOW(),NOW(),2,5,1000,'0.20',0,1,'numsplit','测试切分表','thedate,cid','','');
@@ -81,7 +81,7 @@ CREATE TABLE dev_table_route (
 	is_primary tinyint(2) unsigned not null default 0,
 	PRIMARY KEY pk_auto_kid (autokid),
 	UNIQUE KEY uk_table_column (table_name, column_name)
-) ENGINE = InnoDB DEFAULT CHARSET=UTF8;
+) ENGINE = MyISAM DEFAULT CHARSET=UTF8;
 
 INSERT INTO dev_table_route VALUES (1,NOW(),NOW(),'numsplit','thedate','','date',1);
 INSERT INTO dev_table_route VALUES (2,NOW(),NOW(),'numsplit','cid','','int',1);

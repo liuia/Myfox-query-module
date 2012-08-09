@@ -12,7 +12,7 @@
         connInfo : { // mysql服务器的连接信息
           conn_host : "##master_conn_host##",
           conn_user : "##master_conn_user##",
-          conn_port : "##master_conn_port##",
+          conn_port : ##master_conn_port##,
           conn_pass : "##master_conn_pass##",
           conn_db   : "##master_conn_db##",
         }
@@ -25,7 +25,7 @@
         connInfo : { // // mysql服务器的连接信息
           conn_host : "##slave_conn_host##",
           conn_user : "##slave_conn_user##",
-          conn_port : "##slave_conn_port##",
+          conn_port : ##slave_conn_port##,
           conn_pass : "##slave_conn_pass##",
           conn_db   : "##slave_conn_db##",
         }

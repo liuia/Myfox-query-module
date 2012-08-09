@@ -18,9 +18,9 @@ var qs   = require('querystring');
 var sep  = String.fromCharCode('\x01');
 var hash = require(__dirname + '/../lib/hash');
 
-var Worker  = require('node-cluster').Worker;
+var ui  = require('pm').createWorker();
 
-var ui = new Worker();
+//var ui = new Worker();
 
 var msg_queue = {};
 

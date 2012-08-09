@@ -8,7 +8,7 @@
 require(__dirname + '/../lib/env');
 var Http    = require('http');
 var fs      = require('fs');
-var Worker  = require('node-cluster').Worker;
+var admin  = require('pm').createWorker();
 var Query   = require(__dirname + '/../lib/query');
 var parse   = require(__dirname + '/../lib/parse');
 var requestDealer = require(__dirname + '/../src/requestDealer');
@@ -35,7 +35,7 @@ var trend = [];  /* 固定时间内请求数记录队列  **/
 
 setInterval(updateTrend, 30 * 60 * 1000);
 
-var admin  = new Worker();
+//var admin  = new Worker();
 
 /*{{{ server()*/
 var server  = Http.createServer(function (req, res) {
@@ -128,11 +128,9 @@ var post_handle = function (req, res) {
     data += trunk;
   });
   req.on('end', function () { 
-    admin.transact();
     var parseData = parse(data);
     if(!parseData) {
       res.end();
-      admin.release();
       return;
     }
     var query = Query.create(parseData);
@@ -151,7 +149,6 @@ var post_handle = function (req, res) {
           var result = formatResult(query);
           query.res.end(result);
           workerLogger.notice('RES|token:'+query.token, JSON.stringify({timeUse:Date.now() - query.start,length:result.length}));
-          admin.release();
         });
       });
     } 
