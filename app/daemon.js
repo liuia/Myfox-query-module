@@ -7,7 +7,7 @@
 
    File: daemon.js
    Author: xuyi (xuyi.zl@taobao.com)
-   Description: �ػ����
+   Description: 守护进程
    Last Modified: 2012-02-27
    */
 
@@ -278,7 +278,7 @@ fireWall.prototype.testBad = function(arr, callback) {
 /* {{{ function _isBad()*/
 function _isBad(arr) {
   var weightMap = {
-    /*��������Ȩ��*/
+    /*各种特征权重*/
     type: {
             'ALL': 60,
           },
@@ -333,9 +333,9 @@ function _isBad(arr) {
 /* }}}*/
 
 /* {{{ function _getBanMinute()*/
-//���sql������ʱ��
-//sql �ڹ涨��ʱ���ڱ�count�Ĵ���*����
-//�����ʱ��30min
+//获得sql被封禁的时间
+//sql 在规定的时间内被count的次数*比例
+//最大封禁时长30min
 function _getBanMinute(count) {
   return Math.min(30, Math.round(count * 0.1));
 }
@@ -348,7 +348,7 @@ function _getConn(host, user, pass, port) {
     conn.initSync();
     conn.setOptionSync(conn.MYSQL_OPT_CONNECT_TIMEOUT, 1);
     conn.setOptionSync(conn.MYSQL_OPT_READ_TIMEOUT, 2); // *3 retry
-    conn.setOptionSync(conn.MYSQL_OPT_RECONNECT, 1); //�Զ�����
+    conn.setOptionSync(conn.MYSQL_OPT_RECONNECT, 1); //自动重连
     conn.realConnectSync(host, user, pass, '', port);
     conn.setCharsetSync('gbk');
   } catch(e) {
