@@ -270,24 +270,20 @@ function getTableNodes(tables, parts, reqObj, cb) {
 			for ( var j = 0; j < len; j++) {
 				(function() {
 					var tbn = routeMap[i].tableInfo.table_name;
-					routecalc
-							.findNodes(reqObj, routeMap[i],
-									routeMap[i].decareRes[j], function(err,
-											data) {
-										if (err) {
-											counter.succeed = false;
-										} else {
-											console.log("requestDealer:"
-													+ data.length);
-											if (data.length != 0) {
-												if (tbnode[tbn] === undefined) {
-													tbnode[tbn] = [];
-												}
-												tbnode[tbn].push(data);
-											}
+					routecalc.findNodes(reqObj, routeMap[i],
+							routeMap[i].decareRes[j], function(err, data) {
+								if (err) {
+									counter.succeed = false;
+								} else {
+									if (data.length != 0) {
+										if (tbnode[tbn] === undefined) {
+											tbnode[tbn] = [];
 										}
-										counter.emit("reached");
-									});
+										tbnode[tbn].push(data);
+									}
+								}
+								counter.emit("reached");
+							});
 				})();
 			}
 		}

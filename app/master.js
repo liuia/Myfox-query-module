@@ -18,7 +18,6 @@ var TYPE = {
 
 var real = fs.realpathSync;
 
-var control_queue = {};
 
 // var app = new Master({
 // 'max_fatal_restart' : 2,
@@ -27,11 +26,11 @@ var control_queue = {};
 
 app.register(masterConf.port, real(__dirname + '/worker.js'), {
 	'children' : masterConf.workerNum,
-	'listen':masterConf.port
+	'listen' : masterConf.port
 });
 app.register(masterConf.userPort, real(__dirname + '/ui.js'), {
 	'children' : 1,
-	'listen':masterConf.userPort
+	'listen' : masterConf.userPort
 });
 app.register('daemon', real(__dirname + '/daemon.js'), {
 	'children' : 1
@@ -39,48 +38,53 @@ app.register('daemon', real(__dirname + '/daemon.js'), {
 
 app.dispatch();
 
+process.on('exit', function() {
+	app.shutdown();
+});
+
 /* {{{ listen */
 /* heared form ui */
-// for( var key in app.heartmsg[masterConf.userPort]) {
-// app.children[key].on('message', function(data){
-// if(TYPE.CONTROL == data.type) {
-// send2worker(data);
-// }
-// });
-// }
+
+//for ( var key in app.heartmsg[masterConf.userPort]) {
+//	app.children[key].on('message', function(data) {
+//		if (TYPE.CONTROL == data.type) {
+//			send2worker(data);
+//		}
+//	});
+//}
 //
-// /* hear form worker*/
-// for( var key in app.heartmsg[masterConf.port]) {
-// app.children[key].on('message', function(data){
-// if(TYPE.CONTROL == data.type) {
-// send2ui(data);
-// }
-// });
-// }
-// /*}}}*/
+///* hear form worker */
+//for ( var key in app.heartmsg[masterConf.port]) {
+//	app.children[key].on('message', function(data) {
+//		if (TYPE.CONTROL == data.type) {
+//			send2ui(data);
+//		}
+//	});
+//}
+///* }}} */
 //
-// /*{{{ send2worker()*/
-// var send2worker = function (data) {
-// control_queue[data.id] = {
-// type : TYPE.CONTROL,
-// id : data.id,
-// request : data,
-// results : []
-// };
-// for( var key in app.heartmsg[masterConf.port]) {
-// app.children[key].send(data);
-// }
-// }
-// /*}}}*/
+///* {{{ send2worker() */
+//var send2worker = function(data) {
+//	control_queue[data.id] = {
+//		type : TYPE.CONTROL,
+//		id : data.id,
+//		request : data,
+//		results : []
+//	};
+//	for ( var key in app.heartmsg[masterConf.port]) {
+//		app.children[key].send(data);
+//	}
+//}
+///* }}} */
 //
-// /*{{{ send2ui()*/
-// var send2ui = function (data) {
-// control_queue[data.id].results.push(data);
-// if(control_queue[data.id].results.length == masterConf.workerNum ) {
-// for( var key in app.heartmsg[masterConf.userPort]) {
-// app.children[key].send(control_queue[data.id]);
-// delete control_queue[data.id];
-// }
-// }
-// }
+///* {{{ send2ui() */
+//var send2ui = function(data) {
+//	control_queue[data.id].results.push(data);
+//	if (control_queue[data.id].results.length == masterConf.workerNum) {
+//		for ( var key in app.heartmsg[masterConf.userPort]) {
+//			app.children[key].send(control_queue[data.id]);
+//			delete control_queue[data.id];
+//		}
+//	}
+//}
 /* }}} */

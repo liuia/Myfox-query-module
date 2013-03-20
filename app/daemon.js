@@ -31,6 +31,8 @@ var sqlNormalizer = require(__dirname + '/../lib/daemon/sqlNormalize.js').create
 
 var sqlCounter = require(__dirname + '/../lib/sqlCount.js').create(sc_config); 
 
+var worker = require('pm').createWorker().ready(); 
+
 /* {{{ fireWall()*/
 var fireWall = function() {
   var _self = this;
@@ -346,11 +348,11 @@ function _getConn(host, user, pass, port) {
   try {
     var conn = Mysql.createConnectionSync();
     conn.initSync();
-    conn.setOptionSync(conn.MYSQL_OPT_CONNECT_TIMEOUT, 1);
-    conn.setOptionSync(conn.MYSQL_OPT_READ_TIMEOUT, 2); // *3 retry
-    conn.setOptionSync(conn.MYSQL_OPT_RECONNECT, 1); //自动重连
+    conn.setOptionSync(Mysql.MYSQL_OPT_CONNECT_TIMEOUT, 1);
+    conn.setOptionSync(Mysql.MYSQL_OPT_READ_TIMEOUT, 2); // *3 retry
+    conn.setOptionSync(Mysql.MYSQL_OPT_RECONNECT, 1); //自动重连
     conn.realConnectSync(host, user, pass, '', port);
-    conn.setCharsetSync('gbk');
+    conn.setCharsetSync('UTF8');
   } catch(e) {
     return null;
   }
@@ -434,3 +436,6 @@ setInterval(function () {
     sqlCounter.run();
   }
 },  3600 * 1000);
+
+
+

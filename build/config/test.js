@@ -6,13 +6,13 @@ module.exports = {
 
     master_conn_host : "127.0.0.1",//路由主库host
     master_conn_user : "liurijia",//##用户名##
-    master_conn_port : 5029,//端口
+    master_conn_port : "3306",//端口
     master_conn_pass : "liurijia",//##密码##
     master_conn_db   : "",//
 
     slave_conn_host : "127.0.0.1",//路由备库host
     slave_conn_user : "liurijia",//##用户名##
-    slave_conn_port : 3306,//端口
+    slave_conn_port : "3306",//端口
     slave_conn_pass : "liurijia",//##密码##
     slave_conn_db   : "",//
   },
@@ -22,7 +22,7 @@ module.exports = {
   sqlcount_config : { //sql归一地址
     master_conn_host : "127.0.0.1",//host
     master_conn_user : "liurijia",//##用户名##
-    master_conn_port : "5029",//
+    master_conn_port : "3306",//
     master_conn_pass : "liurijia",//##密码##
     master_conn_db   : "meta_myfox_config",//数据库名
   },

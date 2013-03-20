@@ -24,6 +24,7 @@ var MysqlLoader = factory.getMysqlLoader();
  */
 var calc = function(req, cb){
   this.route = req.res;
+  console.log(this.route);
   this.reqObj = req.reqObj;
   this.merge = _mergeInit(req.res); 
   this.cb = cb;
@@ -93,6 +94,7 @@ function _getMerge(merge, data){
   while (data.length !== 0) {
     merge.push(data.shift());
   }
+  console.log(merge.getData());
   return merge.getData();
 }
 /*}}}*/
@@ -210,6 +212,7 @@ function _mergeInit(info){
   merge.setEvals(evals);
   merge.setMerge(groups);
   merge.setHidden(hidden);
+  console.log(merge);
   return merge;
 }
 /*}}}*/
